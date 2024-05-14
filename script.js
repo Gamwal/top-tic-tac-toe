@@ -1,7 +1,14 @@
 const board = ((num) => {
-  const positions = [];
+  // const positions = {};
+  // for (let i = 0; i < num; i++){
+  //   for (let j = 0; j < num; j++){
+  //     positions[`pos_${i}${j}`] = null;
+  //   }
+  // }
+
+  const positions = {};
   for (let i = 0; i < num*num; i++){
-    positions.push(i);
+    positions[`${String(i)}`] = null;
   }
   return { positions }
 })(3);
@@ -23,10 +30,7 @@ function Player() {
 
 
 function gamePlay() {
-  const playerXpositions = [];
-  const playerOpositions = [];
-  let expectedInputs = 9;
-  let gameCounter = 0
+  const playerPositions = [];
 
   const player = Player();
   
@@ -34,20 +38,26 @@ function gamePlay() {
     let playerMarker = player.currentPlayer();
     const newPosition = prompt("Choose a position: ");
 
-    if (playerMarker === "X") {
-      playerXpositions.push(newPosition);
-    } else {
-      playerOpositions.push(newPosition);
+    if (newPosition in board.positions && !playerPositions.includes(newPosition)) {
+      playerPositions.push(newPosition);
+      if (playerMarker === "X") {
+        board.positions[newPosition] = 'X'
+      } else {
+        board.positions[newPosition] = 'O'
+      }
     }
+    
     player.switchPlayer();
   }
 
-  while (gameCounter <= expectedInputs) {
-    console.log(`Round ${gameCounter}`);
+  // function checkWinner() {
+
+  // }
+
+  while (playerPositions.length < 9) {
+    console.log(`Round ${playerPositions.length + 1}`);
     takePlayerInput();
-    console.log(`Player X : ${playerXpositions}`);
-    console.log(`Player O : ${playerOpositions}`);
-    gameCounter++;
+    console.log(board.positions);
   }
 }
 
