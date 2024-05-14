@@ -1,12 +1,11 @@
 const board = ((num) => {
-  const positions = {};
-  for (let i = 0; i < num; i++){
-    for (let j = 0; j < num; j++){
-      positions[`pos_${i}${j}`] = null;
-    }
+  const positions = [];
+  for (let i = 0; i < num*num; i++){
+    positions.push(i);
   }
   return { positions }
 })(3);
+
 
 function Player() {
   let state = "X";
@@ -18,8 +17,38 @@ function Player() {
   function switchPlayer() {
     state = (state === "X") ? "O" : "X";
   }
-  
+
   return { currentPlayer, switchPlayer };
 }
 
-const player = Player();
+
+function gamePlay() {
+  const playerXpositions = [];
+  const playerOpositions = [];
+  let expectedInputs = 9;
+  let gameCounter = 0
+
+  const player = Player();
+  
+  function takePlayerInput() {
+    let playerMarker = player.currentPlayer();
+    const newPosition = prompt("Choose a position: ");
+
+    if (playerMarker === "X") {
+      playerXpositions.push(newPosition);
+    } else {
+      playerOpositions.push(newPosition);
+    }
+    player.switchPlayer();
+  }
+
+  while (gameCounter <= expectedInputs) {
+    console.log(`Round ${gameCounter}`);
+    takePlayerInput();
+    console.log(`Player X : ${playerXpositions}`);
+    console.log(`Player O : ${playerOpositions}`);
+    gameCounter++;
+  }
+}
+
+gamePlay();
