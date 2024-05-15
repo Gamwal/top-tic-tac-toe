@@ -24,58 +24,67 @@ function Player() {
 }
 
 
-function gamePlay() {
+(function gamePlay() {
   const playerPositions = [];
-  const player = Player();
-  
-  function takePlayerInput() {
-    let playerMarker = player.currentPlayer();
-    const newPosition = prompt("Choose a position: ");
 
-    if (newPosition in board.positions && !playerPositions.includes(newPosition)) {
-      playerPositions.push(newPosition);
+  const player = Player();
+
+  const newPosition = document.getElementById('board');
+
+  function clickHandler(e) {
+    const eventID = e.target.id;
+
+    let playerMarker = player.currentPlayer();
+
+    if (eventID in board.positions && e.target.textContent === "") {
+      playerPositions.push(eventID);
       if (playerMarker === "X") {
-        board.positions[newPosition] = 'X'
+        board.positions[eventID] = 'X'
       } else {
-        board.positions[newPosition] = 'O'
+        board.positions[eventID] = 'O'
       }
       player.switchPlayer();
-    }
-  }
+      updateBoard();
+      
+      let winner = checkWinner();
 
-  function checkWinner() {
-    const winningCombos = [
-      [0,4,8], [0,1,2], [0,3,6], [1,4,7],
-      [2,4,6], [2,5,8], [3,4,5], [6,7,8]
-    ];
-
-    for (const combo of winningCombos) {
-      const [a, b, c] = combo;
-      if (board.positions[a] === board.positions[b] && board.positions[b] === board.positions[c] && board.positions[c] !== null) {
-        return [true, board.positions[a]];
+      if (winner[0] === true) {
+        console.log(`${winner[1]} wins`);
+        newPosition.removeEventListener("click", clickHandler);
       }
     }
-    return false
   }
 
-  while (playerPositions.length < 9) {
-    console.log(`Round ${playerPositions.length + 1}`);
-    takePlayerInput();
+    newPosition.addEventListener("click", clickHandler);
 
-    console.log(playerPositions);
-    // console.log(board.positions);
-
-    let winner = checkWinner();
-
-    if (winner[0] === true) {
-      console.log(`${winner[1]} wins`);
-      break;
+    function checkWinner() {
+      const winningCombos = [
+        [0,4,8], [0,1,2], [0,3,6], [1,4,7],
+        [2,4,6], [2,5,8], [3,4,5], [6,7,8]
+      ];
+  
+      for (const combo of winningCombos) {
+        const [a, b, c] = combo;
+        if (board.positions[a] === board.positions[b] && board.positions[b] === board.positions[c] && board.positions[c] !== null) {
+          return [true, board.positions[a]];
+        }
+      }
+      return false
     }
-  }
 
-  if (playerPositions.length === 9 && checkWinner() === false) {
-    console.log("Draw")
-  }
-}
+    function updateBoard() {
+      Object.keys(board.positions).forEach((key) => {
+        const boardPosition = document.getElementById(key);
+        boardPosition.textContent = (board.positions[key] !== null) ?  board.positions[key] : "";
+      });
+    }
 
-gamePlay();
+    (function displayBoard() {
+      const pageBoard = document.getElementById('board');
+      Object.keys(board.positions).forEach((key) => {
+        const boardPosition = document.createElement('div');
+        boardPosition.id = key;
+        pageBoard.appendChild(boardPosition);
+      });
+    })();
+})();
