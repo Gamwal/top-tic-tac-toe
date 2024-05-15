@@ -49,7 +49,8 @@ function Player() {
       let winner = checkWinner();
 
       if (winner[0] === true) {
-        console.log(`${winner[1]} wins`);
+        // console.log(`${winner[1]} wins`);
+        alert(`${winner[1]} wins`);
         newPosition.removeEventListener("click", clickHandler);
       }
     }
