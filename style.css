@@ -57,7 +57,7 @@ body {
   margin: 2rem 0rem;
   display: flex;
   align-items: center;
-  gap: 4rem;
+  gap: 3rem;
   flex-wrap: wrap;
   flex-direction: column;
 }
