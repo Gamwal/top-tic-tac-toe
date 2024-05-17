@@ -83,7 +83,6 @@ function Player() {
         updateBoard();
         
         let winner = checkWinner();
-        console.log(playerPositions.length)
         if (winner[0] === true) {
           player.displayPrompt(winner[1])
           newPosition.removeEventListener("click", clickHandler);
@@ -140,7 +139,3 @@ function Player() {
   resetButton.addEventListener("click", clearBoard);
 
 })();
-
-
-const resetButton = document.getElementById('reset');
-resetButton.addEventListener()
