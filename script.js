@@ -81,12 +81,12 @@ function Player() {
         player.switchPlayer();
         player.displayPrompt();
         updateBoard();
-        
+
         let winner = checkWinner();
         if (winner[0] === true) {
           player.displayPrompt(winner[1])
           newPosition.removeEventListener("click", clickHandler);
-        } else if (playerPositions.length === 9 && winner === false) {
+        } else if (playerPositions.length === 9 && winner[0] === false) {
           player.displayPrompt('DRAW');
         }
       }
@@ -103,10 +103,9 @@ function Player() {
       const [a, b, c] = combo;
       if (board.positions[a] === board.positions[b] && board.positions[b] === board.positions[c] && board.positions[c] !== null) {
         return [true, board.positions[a]];
-      } else {
-        return false
       }
     }
+    return [false, null];
   }
 
   function updateBoard() {
@@ -123,6 +122,7 @@ function Player() {
       player.resetPlayer();
       updateBoard();
       player.displayPrompt();
+      newPosition.addEventListener("click", clickHandler);
     });
   }
 
