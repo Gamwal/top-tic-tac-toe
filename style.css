@@ -8,18 +8,21 @@ html {
 }
 
 body {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
   display: flex;
   flex-direction: column;
   height: 100vh;
   text-align: center;
 }
 
-.board-container {
+.game-container {
   box-sizing: border-box;
   flex-grow: 1;
-  /* background-color: brown; */
   display: flex;
   align-items: center;
+  justify-content: center;
+  padding: 2rem 0rem;
+  gap: 2rem;
 }
 
 .board {
@@ -29,13 +32,34 @@ body {
   gap: 1rem;
   width: clamp(30vw, 300px, 100vw);
   height: clamp(30vw, 300px, 100vw);
-  /* background-color: azure; */
 }
 
 .header,
 .footer {
-  background-color: blue;
-  height: 5vh;
+  background-color: rgb(0, 0, 255);
+  color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  font-size: 4rem;
+  padding: 2rem 0rem;
+}
+
+.footer {
+  font-size: 2rem;
+  padding: 1rem 0rem;
+}
+
+.board-container {
+  margin: 2rem 0rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 [id|="0"],
@@ -53,4 +77,6 @@ body {
   font-size: 6rem;
   border: 0.1rem solid black;
   border-radius: 1rem;
+  background-color: rgb(240, 255, 255);
+  box-shadow: -0.8rem 0.8rem 1rem rgb(0, 0, 255);
 }
