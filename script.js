@@ -34,9 +34,9 @@ function Player() {
       promptResult.textContent = `${(String(playerTwo.value)).toUpperCase()} WINS`;
     } else {
       if (state === "X") {
-        promptResult.textContent = `${(String(playerOne.value)).toUpperCase()}'s TURN`;
+        promptResult.textContent = `${(String(playerOne.value)).toUpperCase()}'S TURN`;
       } else {
-        promptResult.textContent = `${(String(playerTwo.value)).toUpperCase()}'s TURN`;
+        promptResult.textContent = `${(String(playerTwo.value)).toUpperCase()}'S TURN`;
       }
     }
   }
@@ -50,12 +50,16 @@ function Player() {
     }
   }
 
-  return { currentPlayer, switchPlayer, displayPrompt, checkNames };
+  function resetPlayer() {
+    state = "X";
+  }
+
+  return { currentPlayer, switchPlayer, displayPrompt, checkNames, resetPlayer };
 }
 
 
 (function gamePlay() {
-  const playerPositions = [];
+  let playerPositions = [];
   const player = Player();
   const newPosition = document.getElementById('board');
 
@@ -113,6 +117,16 @@ function Player() {
     });
   }
 
+  function clearBoard() {
+    playerPositions = [];
+    Object.keys(board.positions).forEach((key) => {
+      board.positions[key] = null;
+      player.resetPlayer();
+      updateBoard();
+      player.displayPrompt();
+    });
+  }
+
   (function displayBoard() {
     const pageBoard = document.getElementById('board');
     Object.keys(board.positions).forEach((key) => {
@@ -121,7 +135,12 @@ function Player() {
       pageBoard.appendChild(boardPosition);
     });
   })();
+
+  const resetButton = document.getElementById('reset');
+  resetButton.addEventListener("click", clearBoard);
+
 })();
 
 
-// const newGameButton
+const resetButton = document.getElementById('reset');
+resetButton.addEventListener()

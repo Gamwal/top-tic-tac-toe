@@ -80,3 +80,26 @@ body {
   background-color: rgb(240, 255, 255);
   box-shadow: -0.8rem 0.8rem 1rem rgb(0, 0, 255);
 }
+
+button {
+  padding: 1rem 0;
+  flex-grow: 1;
+  color: white;
+  background-color: blue;
+  font-size: 1.6rem;
+  font-weight: 900;
+  border: none;
+  border-radius: 2rem;
+}
+
+#game-controls {
+  width: clamp(30vw, 300px, 100vw);
+  display: flex;
+  gap: 1rem
+}
+
+#prompts {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 2rem;
+}
