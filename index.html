@@ -7,11 +7,28 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <div class="header">TIC TAC TOE</div>
-  <div class="board-container">
-    <div class="board" id="board"></div>
+  <div class="header">TIC-TAC-TOE</div>
+  <div class="game-container">
+    <div class="board-container">
+      <div id="prompts-results">PLAYER 1 WON!</div>
+      <div class="board" id="board"></div>
+      <div id="game-controls">
+        <button>NEW GAME</button>
+        <button>RESET</button>
+      </div>
+    </div>
+    <div class="player-details">
+      <div class="player-label" id="player1">
+        <label for="">Player 1</label>
+        <input id="" type="text">
+      </div>
+      <div class="player-label" id="player2">
+        <label for="">Player 2</label>
+        <input type="text">
+      </div>
+    </div>
   </div>
-  <div class="footer">footer</div>
+  <div class="footer">Copyright @ 2024 Gamwal</div>
   <script src="./script.js"></script>
 </body>
 </html>
